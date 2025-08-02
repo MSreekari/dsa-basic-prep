@@ -1,25 +1,30 @@
 package arrays;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 
 public class IntersectionOfTwoArrays {
-    public static HashSet<Integer> intersect(int[] nums1, int[] nums2) {
-        HashSet<Integer> set1 = new HashSet<>();
-        HashSet<Integer> set2 = new HashSet<>();
+    public static int[] intersect(int[] nums1, int[] nums2) {
+        HashSet<Integer> set = new HashSet<>();
         for(int num : nums1){
-            set1.add(num);
+            set.add(num);
         }
+        HashSet<Integer> set2 = new HashSet<>();
         for(int num : nums2){
-            set2.add(num);
+            if(set.contains(num)){
+                set2.add(num);
+            }
         }
-        set1.retainAll(set2);
-        return set2;
+        int[] result = new int[set2.size()];
+        int i = 0;
+        for(int num : set2){
+            result[i++] = num;
+        }
+        return result;
     }
     public static void main(String[] args) {
-        int[] arr1 = {1, 2, 2, 1};
-        int[] arr2 = {2, 2};
-        intersect(arr1, arr2);
+        int[] arr1 = {4, 9, 5};
+        int[] arr2 = {9, 4, 9, 8, 4};
+        System.out.println(Arrays.toString(intersect(arr1, arr2)));
     }
 }
